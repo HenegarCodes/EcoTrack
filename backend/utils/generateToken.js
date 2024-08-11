@@ -1,33 +1,13 @@
 const jwt = require('jsonwebtoken');
-const asyncHandler = require('express-async-handler');
-const User = require('../models/User');
+require('dotenv').config({path:'backend/.env'});
 
-const protect = asyncHandler(async (req, res, next) => {
-    let token;
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+console.log("All env variables:", process.env);
 
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith('Bearer')
-    ) {
-        try {
-            token = req.headers.authorization.split(' ')[1];
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d', // Token expires in 30 days
+    });
+};
 
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-            req.user = await User.findById(decoded.id).select('-password');
-
-            next();
-        } catch (error) {
-            console.error(error);
-            res.status(401);
-            throw new Error('Not authorized, token failed');
-        }
-    }
-
-    if (!token) {
-        res.status(401);
-        throw new Error('Not authorized, no token');
-    }
-});
-
-module.exports = { protect };
+module.exports = generateToken;

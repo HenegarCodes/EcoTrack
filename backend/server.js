@@ -11,6 +11,10 @@ console.log("MongoDB URI:", "mongodb+srv://spencerhenegar:baxter@ecotrack.klb9b.
 app.use(cors());
 app.use(express.json());
 
+console.log(process.env.JWT_SECRET);
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+console.log("All env variables:", process.env);
+
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 
