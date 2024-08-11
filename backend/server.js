@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path:'backend/.env'});
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -6,20 +6,16 @@ const cors = require('cors');
 
 // Initialize express app
 const app = express();
-console.log("MongoDB URI:", "mongodb+srv://spencerhenegar:baxter@ecotrack.klb9b.mongodb.net/");
 // Middleware setup
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env.JWT_SECRET);
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
-console.log("All env variables:", process.env);
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://spencerhenegar:baxter@ecotrack.klb9b.mongodb.net/", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log("MongoDB connected"))
