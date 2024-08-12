@@ -2,7 +2,8 @@ require('dotenv').config({path:'backend/.env'});
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const { errorHandler } = require('./middleware/errorMiddleware');
+const connectDB = require('./config/db');
 
 // Initialize express app
 const app = express();
@@ -11,15 +12,16 @@ app.use(cors());
 app.use(express.json());
 
 
-// Routes
+// Register routes
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/activities', require('./routes/activityRoutes'));
+
+//error handler middleware
+app.use(errorHandler);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log("MongoDB connected"))
-  .catch(err => console.log("MongoDB connection error:", err));
+connectDB(); 
 
 // Start server
 const PORT = process.env.PORT || 5001;
