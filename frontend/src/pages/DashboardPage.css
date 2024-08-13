@@ -1,0 +1,95 @@
+
+
+/* General Styles */
+.dashboard-page {
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Carbon Footprint Summary Section */
+.carbon-footprint-summary {
+    text-align: center;
+}
+
+.carbon-footprint-summary h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+/* Activity Log Section */
+.activity-log {
+    margin-top: 40px;
+}
+
+.activity-log h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Activity Log Form Styles */
+.activity-log-form {
+    font-family: 'Roboto', sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-log-form div {
+    margin-bottom: 15px;
+}
+
+.activity-log-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.activity-log-form input,
+.activity-log-form select,
+.activity-log-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.activity-log-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.activity-log-form button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.activity-log-form button:hover {
+    background-color: #218838;
+}

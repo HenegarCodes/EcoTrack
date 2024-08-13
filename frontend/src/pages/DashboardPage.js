@@ -10,8 +10,10 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import ActivityLogForm from '../components/ActivityLog.js'; // Import the ActivityLogForm component
+import './DashboardPage.css';
 
-// Register the components you need
+// Register the components 
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,7 +24,7 @@ ChartJS.register(
   Legend
 );
 
-function Dashboard() {
+function DashboardPage() {  // Rename the function to match the file name
     const carbonFootprintData = {
         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // X-axis labels
         datasets: [
@@ -36,15 +38,43 @@ function Dashboard() {
         ],
     };
 
+    const handleActivitySubmit = async (newActivity) => {
+        console.log('New activity logged:', newActivity);
+    
+        try {
+            const response = await fetch('/api/activities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newActivity),
+            });
+    
+            if (response.ok) {
+                console.log('Activity logged successfully');
+            } else {
+                console.error('Failed to log activity');
+            }
+        } catch (error) {
+            console.error('Error logging activity:', error);
+        }
+    };
+    
+
     return (
-        <div className="dashboard">
+        <div className="dashboard-page">
             <h1>User Dashboard</h1>
             <section className="carbon-footprint-summary">
                 <h2>Carbon Footprint Summary</h2>
                 <Line data={carbonFootprintData} />
             </section>
+            
+            <section className="activity-log">
+                <h2>Log a New Activity</h2>
+                <ActivityLogForm onSubmit={handleActivitySubmit} />
+            </section>
         </div>
     );
 }
 
-export default Dashboard;
+export default DashboardPage;
